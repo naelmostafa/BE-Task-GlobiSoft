@@ -21,7 +21,6 @@ public class Cart {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-
     @ManyToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;

@@ -14,6 +14,17 @@ public class CartItemDto {
         this.product = cart.getProduct();
     }
 
+    public CartItemDto(Integer id, Integer quantity, Product product) {
+        this.id = id;
+        this.quantity = quantity;
+        this.product = product;
+    }
+
+    public CartItemDto(Integer quantity, Product product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
+
     public Integer getId() {
         return id;
     }

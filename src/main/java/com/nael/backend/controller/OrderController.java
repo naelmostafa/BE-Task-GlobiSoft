@@ -4,10 +4,7 @@ import com.nael.backend.entity.Customer;
 import com.nael.backend.entity.Order;
 import com.nael.backend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/order")
@@ -20,8 +17,13 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/add")
-    public Order addOrder(Customer Customer){
+    @PostMapping("/{add}")
+    public Order addOrder(@RequestBody Customer Customer) {
+        return orderService.placeOrder(Customer);
+    }
+
+    @PostMapping("/{place-order}")
+    public Order placeOrder(@RequestBody Customer Customer) {
         return orderService.placeOrder(Customer);
     }
 }

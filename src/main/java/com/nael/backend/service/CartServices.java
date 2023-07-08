@@ -33,6 +33,19 @@ public class CartServices {
         return cartRepository.save(cart);
     }
 
+    public List<Cart> addItemsToCart(List<CartItemDto> cartItemDto, Customer customer) {
+        List<Cart> cartList = new ArrayList<>();
+        for (CartItemDto cartItem : cartItemDto) {
+            Cart cart = new Cart(
+                    cartItem.getProduct(),
+                    customer,
+                    cartItem.getQuantity()
+            );
+            cartList.add(cart);
+        }
+        return cartRepository.saveAll(cartList);
+    }
+
     public Cart updateCart(AddToCartDto addToCartDto, Product product, Customer customer) {
         Cart cart = cartRepository.findById(addToCartDto.getId()).orElse(null);
         if (cart == null) throw new AssertionError();

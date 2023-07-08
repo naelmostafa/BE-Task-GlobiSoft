@@ -12,8 +12,11 @@ import com.nael.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/cart")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CartController {
     private final CartServices cartServices;
     private final ProductService productService;
@@ -25,17 +28,17 @@ public class CartController {
         this.productService = productService;
         this.customerService = customerService;
     }
-    @PostMapping("/add")
-    public Cart addToCart(@RequestBody AddToCartDto addToCartDto) {
-        Customer customer = this.customerService.getCustomerById(addToCartDto.getCustomerId());
-        Product product = this.productService.getProductById(addToCartDto.getProductId());
-        return cartServices.addToCart(addToCartDto, product, customer);
+    @PostMapping("/{add}")
+    public List<Cart> addToCart(@RequestBody CartDto cartDto) {
+        Customer customer = this.customerService.getCustomerById(cartDto.getCustomerId());
+        return cartServices.addItemsToCart(cartDto.getCartItems(), customer);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/{update}")
     public Cart updateCart(@RequestBody AddToCartDto addToCartDto) {
         Customer customer = this.customerService.getCustomerById(addToCartDto.getCustomerId());
         Product product = this.productService.getProductById(addToCartDto.getProductId());
         return cartServices.updateCart(addToCartDto, product, customer);
     }
+
 }
