@@ -28,6 +28,11 @@ public class CartController {
         this.productService = productService;
         this.customerService = customerService;
     }
+
+    @GetMapping("/all")
+    public List<Cart> getAllCarts() {
+        return cartServices.getAllCarts();
+    }
     @PostMapping("/{add}")
     public List<Cart> addToCart(@RequestBody CartDto cartDto) {
         Customer customer = this.customerService.getCustomerById(cartDto.getCustomerId());
@@ -39,6 +44,11 @@ public class CartController {
         Customer customer = this.customerService.getCustomerById(addToCartDto.getCustomerId());
         Product product = this.productService.getProductById(addToCartDto.getProductId());
         return cartServices.updateCart(addToCartDto, product, customer);
+    }
+
+    @GetMapping("/{customerId}")
+    public CartDto getCart(@PathVariable Integer customerId) {
+        return cartServices.listCartItems(this.customerService.getCustomerById(customerId));
     }
 
 }

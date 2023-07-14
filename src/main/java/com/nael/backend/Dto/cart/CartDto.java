@@ -7,6 +7,9 @@ public class CartDto {
     private Integer customerId;
     private double totalCost;
 
+    public CartDto() {
+    }
+
     public CartDto(List<CartItemDto> cartItems, double totalCost) {
         this.cartItems = cartItems;
         this.totalCost = totalCost;

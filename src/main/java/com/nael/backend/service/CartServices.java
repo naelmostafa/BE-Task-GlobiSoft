@@ -43,6 +43,7 @@ public class CartServices {
             );
             cartList.add(cart);
         }
+
         return cartRepository.saveAll(cartList);
     }
 
@@ -78,6 +79,10 @@ public class CartServices {
     @Transactional
     public void deleteUserCartItems(Customer customer) {
         cartRepository.deleteByCustomer(customer);
+    }
+
+    public List<Cart> getAllCarts() {
+        return cartRepository.findAll();
     }
 
 }

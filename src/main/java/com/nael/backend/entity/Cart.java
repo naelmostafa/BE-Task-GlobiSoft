@@ -1,6 +1,5 @@
 package com.nael.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -17,7 +16,7 @@ public class Cart {
     @CreationTimestamp
     private Date createdDate;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 

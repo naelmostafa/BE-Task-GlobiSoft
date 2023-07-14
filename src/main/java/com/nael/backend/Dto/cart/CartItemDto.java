@@ -8,6 +8,9 @@ public class CartItemDto {
     private Integer quantity;
     private Product product;
 
+    public CartItemDto() {
+    }
+
     public CartItemDto(Cart cart) {
         this.id = cart.getId();
         this.quantity = cart.getQuantity();

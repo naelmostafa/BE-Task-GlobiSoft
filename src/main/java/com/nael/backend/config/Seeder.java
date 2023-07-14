@@ -1,6 +1,9 @@
 package com.nael.backend.config;
 
 import com.nael.backend.Dto.cart.AddToCartDto;
+import com.nael.backend.Dto.cart.CartDto;
+import com.nael.backend.Dto.cart.CartItemDto;
+import com.nael.backend.controller.CartController;
 import com.nael.backend.entity.*;
 import com.nael.backend.repository.*;
 import com.nael.backend.service.CartServices;
@@ -25,7 +28,8 @@ public class Seeder {
             OrderRepository orderRepository,
             OrderService orderService,
             CartRepository cartRepository,
-            CartServices cartServices
+            CartServices cartServices,
+            CartController cartController
     ) {
         return args -> {
             List<Customer> customers = List.of(
@@ -67,8 +71,21 @@ public class Seeder {
             );
             cartRepository.saveAll(carts);
 
-            orderService.placeOrder(customers.get(0));
 
+            CartDto cartDto = new CartDto(
+                    List.of(
+                            new CartItemDto(10, products.get(0)),
+                            new CartItemDto(10, products.get(1)),
+                            new CartItemDto(10, products.get(2)),
+                            new CartItemDto(10, products.get(3))
+                    ),
+                    customers.get(1).getId()
+            );
+
+            cartController.addToCart(cartDto);
+
+            orderService.placeOrder(customers.get(0));
+            orderService.placeOrder(customers.get(1));
 
         };
     }

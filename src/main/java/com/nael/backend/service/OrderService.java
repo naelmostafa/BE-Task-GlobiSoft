@@ -16,7 +16,6 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CartServices cartServices;
-
     private final OrderItemRepository orderItemRepository;
 
     @Autowired
@@ -53,6 +52,10 @@ public class OrderService {
 
     public List<Order> listOrders(Customer customer) {
         return orderRepository.findAllByCustomerOrderByCreatedDateDesc(customer);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
     }
 
 }
