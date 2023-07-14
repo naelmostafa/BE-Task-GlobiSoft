@@ -12,8 +12,6 @@ import com.nael.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/cart")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -30,11 +28,12 @@ public class CartController {
     }
 
     @GetMapping("/all")
-    public List<Cart> getAllCarts() {
+    public Iterable<Cart> getAllCarts() {
         return cartServices.getAllCarts();
     }
+
     @PostMapping("/{add}")
-    public List<Cart> addToCart(@RequestBody CartDto cartDto) {
+    public Iterable<Cart> addToCart(@RequestBody CartDto cartDto) {
         Customer customer = this.customerService.getCustomerById(cartDto.getCustomerId());
         return cartServices.addItemsToCart(cartDto.getCartItems(), customer);
     }

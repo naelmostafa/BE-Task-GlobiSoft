@@ -6,8 +6,6 @@ import com.nael.backend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/order")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,7 +18,7 @@ public class OrderController {
     }
 
     @GetMapping("/all")
-    public List<Order> getAllOrders() {
+    public Iterable<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
